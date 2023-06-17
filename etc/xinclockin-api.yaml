@@ -1,3 +1,26 @@
 Name: xinclockin-api
 Host: 0.0.0.0
 Port: 8888
+Model: debug
+Timeout: 30000
+Log:
+  ServiceName: "xinclockin-srv"
+  Mode: file
+  Encoding: json
+  KeepDays: 7
+  Path: "logs"
+  Stat: true
+
+Auth:
+  AccessSecret: lesafasfasewdpenpnfiw3p
+  AccessExpire: 31556952
+
+AdminHeader:
+  Xid: "123456"
+
+Mysql:
+  DNS: root:123456@tcp(127.0.0.1:3306)/xinclockin?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Type: node

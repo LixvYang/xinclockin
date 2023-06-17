@@ -21,4 +21,3 @@ func (m *AdminMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		next(w, r)
 	}
 }
-
