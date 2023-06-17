@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"github.com/lixvyang/rebetxin-one/common/errorx"
 	"net/http"
 
+	"github.com/lixvyang/xinclockin/internal/logic"
+	"github.com/lixvyang/xinclockin/internal/svc"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"xinclockin/internal/logic"
-	"xinclockin/internal/svc"
 )
 
 func DeleteXinClockInHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

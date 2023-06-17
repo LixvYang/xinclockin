@@ -4,7 +4,10 @@ package handler
 import (
 	"net/http"
 
-	"xinclockin/internal/svc"
+	clockin "github.com/lixvyang/xinclockin/internal/handler/clockin"
+	oauth "github.com/lixvyang/xinclockin/internal/handler/oauth"
+	user "github.com/lixvyang/xinclockin/internal/handler/user"
+	"github.com/lixvyang/xinclockin/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -15,13 +18,74 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/clockin",
-				Handler: CreateXinClockInHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/clockin/:id",
-				Handler: DeleteXinClockInHandler(serverCtx),
+				Handler: user.CreateXinClockInHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/content",
+				Handler: clockin.CreateContentHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/signin",
+				Handler: oauth.SigninHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Admin},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/user",
+					Handler: user.CreateUserHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/user",
+				Handler: user.GetUserHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Admin},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/user",
+					Handler: user.GetUserListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1/admin"),
 	)
 }

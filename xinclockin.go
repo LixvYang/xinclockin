@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"xinclockin/internal/config"
-	"xinclockin/internal/handler"
-	"xinclockin/internal/svc"
+	"github.com/lixvyang/xinclockin/internal/config"
+	"github.com/lixvyang/xinclockin/internal/handler"
+	"github.com/lixvyang/xinclockin/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

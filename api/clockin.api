@@ -23,7 +23,7 @@ type CreateClockinReq {
   Description string `json:"description,required"`
   WordCount int `json:"word_count,required"`
   Cover string `json:"cover"`
-  StartDay string `json:"start_day`
+  StartDay string `json:"start_day"`
   EndDay string `json:"end_day"`
   ClockinStartDaily string `json:"clockin_start_daily,required"`
   ClockinEndDaily string `json:"clockin_end_daily"`

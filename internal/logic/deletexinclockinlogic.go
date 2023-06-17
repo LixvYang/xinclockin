@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/zeromicro/go-zero/core/logx"
-	"xinclockin/internal/svc"
+	"github.com/lixvyang/xinclockin/internal/svc"
 )
 
 type DeleteXinClockInLogic struct {
