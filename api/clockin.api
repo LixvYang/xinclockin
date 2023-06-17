@@ -1,0 +1,36 @@
+info(
+  title: 
+  desc: 
+  author: 
+  email: @xiaoheiban.cn
+  version: 1.0
+)
+
+// 定义已经有jwt的api
+@server(
+	jwt: Auth
+	group: user
+	prefix: /api/v1
+)
+service xinclockin-api {
+  @handler CreateXinClockInHandler
+  post /clockin(CreateClockinReq) returns (CreateClockinResp)
+}
+
+type CreateClockinReq {
+  Uid string `json:"uid,required"`
+  Title string `json:"title,required"`
+  Description string `json:"description,required"`
+  WordCount int `json:"word_count,required"`
+  Cover string `json:"cover"`
+  StartDay string `json:"start_day`
+  EndDay string `json:"end_day"`
+  ClockinStartDaily string `json:"clockin_start_daily,required"`
+  ClockinEndDaily string `json:"clockin_end_daily"`
+  TotalFee uint64 `json:"total_fee"`
+  BonusDaily uint64 `json:"bonus_daily"`
+}
+
+type CreateClockinResp {
+
+}

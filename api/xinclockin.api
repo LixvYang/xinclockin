@@ -1,0 +1,17 @@
+info(
+	title:
+	desc:
+	author:
+	email: @xinclock
+	version: 1.0
+)
+
+service xinclockin-api {
+	
+	@handler CreateXinClockInHandler
+	post /clockin () returns ()
+	
+	@handler DeleteXinClockInHandler
+	delete /clockin/:id () returns ()
+	
+}
